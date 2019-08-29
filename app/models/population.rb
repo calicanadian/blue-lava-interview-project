@@ -8,6 +8,17 @@ class Population < ApplicationRecord
     Population.all.map(&:year).max.year
   end
 
+  def self.caclulate_growth(year)
+    # This was inspired by https://stackoverflow.com/a/33908554/6605631
+    # It uses the exponential growth model as we don't have enough
+    # information to use the logistic model (birth and death rate)
+    year = (year > 2500) ? 2500 : year
+    population = Population.find_by_year(Date.new(max_year)).population
+    calc_pop = population
+    ((year - max_year) + 1).times {|x| calc_pop = (x*population)-(9-x)**2 }
+    return calc_pop
+  end
+
   def self.get_population(year)
     year1 = (year - year%10)
     year2 = (year - year%10) + 10
@@ -27,9 +38,9 @@ class Population < ApplicationRecord
     year = year.to_i
 
     return 0 if year < min_year
-    return Population.find_by_year(Date.new(year)).population if year == min_year
-    if year >= max_year
-      pop = Population.find_by_year(Date.new(max_year)).population
+    return Population.find_by_year(Date.new(year)).population if year == min_year || year == max_year
+    if year > max_year
+      pop = caclulate_growth(year)
       return pop
     end
 
