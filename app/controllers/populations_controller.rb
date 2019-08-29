@@ -3,7 +3,7 @@ class PopulationsController < ApplicationController
   end
 
   def show
-    @year = params[:year].html_safe
+    @year = params[:year].gsub(/\D/, '')
     @population = Population.get(@year)
   end
 end
