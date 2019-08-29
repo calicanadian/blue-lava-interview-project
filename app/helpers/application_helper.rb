@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def year
-    @year.html_safe
+    @year.gsub(/\D/, '') unless @year.blank?
   end
 
   def population
