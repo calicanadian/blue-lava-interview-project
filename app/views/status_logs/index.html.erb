@@ -4,6 +4,8 @@
       <th>Response Code</th>
       <th>Request Path</th>
       <th>Parameters</th>
+      <th>Population</th>
+      <th>Result Type</th>
       <th>Time Occurred</th>
       <th></th>
     </tr>
@@ -11,10 +13,12 @@
   <tbody>
     <% @status_logs.each do |log| %>
       <tr>
-        <td><%= log.response_code %></td>
-        <td><%= log.request_url %></td>
-        <td><%= log.log %></td>
-        <td><%= log.created_at.strftime('%Y/%m/%d') %></td>
+        <td><%= log.response_code unless log.response_code.blank? %></td>
+        <td><%= log.request_url unless log.request_url.blank? %></td>
+        <td><%= log.log unless log.log.blank? %></td>
+        <td><%= log.population unless log.population.blank? %></td>
+        <td><%= log.result_type unless log.result_type.blank? %></td>
+        <td><%= log.created_at.strftime('%Y/%m/%d') unless log.created_at.blank? %></td>
       </tr>
     <% end %>
   </tbody>
