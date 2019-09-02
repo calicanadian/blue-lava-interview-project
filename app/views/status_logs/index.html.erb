@@ -23,3 +23,25 @@
     <% end %>
   </tbody>
 </table>
+
+
+<table>
+  <thead>
+    <tr>
+      <td>Year</td>
+      <td>Population</td>
+      <td>Visits</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% unless @visits.blank? %>
+      <% @visits.each do |visit| %>
+        <tr>
+          <td><%#= visit.year.strftime('%Y') %></td>
+          <td><%#= visit.population %></td>
+          <td><%= visit.visits %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

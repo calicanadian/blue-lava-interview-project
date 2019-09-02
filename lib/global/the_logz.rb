@@ -24,6 +24,6 @@ class TheLogz
         type = 'calculated'
       end
     end
-    StatusLog.create!(status: status, response_code: code, request_url: url, log: params, population: population, result_type: type)
+    StatusLog.create!(year: year.to_s, status: status, response_code: code, request_url: url, log: params, population: population, result_type: type)
   end
 end
